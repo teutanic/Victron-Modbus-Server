@@ -11,10 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Observable;
 
-/**
- *
- * @author gmd
- */
+
 public class ModbusDefinitions {
     
     /*
@@ -35,11 +32,11 @@ public class ModbusDefinitions {
         // we create the device list hardcoded
         // this list is used to locate the uId for each device
         // this data is fairly fixed 
-        uidList.add( new ModbusUid("MPPT", 0, 0));           // Ve.can on CCGX starts with device id 0
-        uidList.add( new ModbusUid("MPPT", 1, 1));           // index 1 is the second MPPT controller at aId 1
-        uidList.add( new ModbusUid("BMV",  0, 245));         // the BMV on Ve-direct 1
-        uidList.add( new ModbusUid("BMV",  1, 247));         // the BMV on Ve-direct 2
-        uidList.add( new ModbusUid("Multi",0, 246));         // the pair of multis appears as one 
+        uidList.add( new ModbusUid("MPPT", 0, 0, 774));         // Ve.can on CCGX starts with device id 0
+        uidList.add( new ModbusUid("MPPT", 1, 1, 774));         // index 1 is the second MPPT controller at aId 1
+        uidList.add( new ModbusUid("BMV",  0, 245, 259));       // the BMV on Ve-direct 1
+        uidList.add( new ModbusUid("BMV",  1, 247, 259));       // the BMV on Ve-direct 2
+        uidList.add( new ModbusUid("Multi",0, 246, 33));        // the pair of multis appears as one 
 
         
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
@@ -70,15 +67,33 @@ public class ModbusDefinitions {
         }
     }
 
-    // finding the proper uId for the device with index
-    public int findUid(String aType, int anIndex) {
+    // finding the uId object for the device with index
+     public ModbusUid findUidObject(String aType, int anIndex) {
           for (int i=0; i< uidList.size(); i++) {
               ModbusUid aUidObject = uidList.get(i);
               if ( aUidObject.getType().equals(aType) && (aUidObject.getIndex()==anIndex) ){
-                  return aUidObject.getuId();
+                  return aUidObject;
              }
           }
-          return -1;
+          return null;
+    }
+     
+    // finding the pingRegister for the device with index
+    public int findPingRegister(String aType, int anIndex) {
+          ModbusUid aUidObject = findUidObject(aType,anIndex);
+          if (aUidObject != null)
+              return aUidObject.getPingRegister();
+          else
+              return -1;
+    }
+
+    // finding the proper uId for the device with index
+    public int findUid(String aType, int anIndex) {
+          ModbusUid aUidObject = findUidObject(aType,anIndex);
+          if (aUidObject != null)
+              return aUidObject.getuId();
+          else
+              return -1;
     }
     
     // return the number of definition objects

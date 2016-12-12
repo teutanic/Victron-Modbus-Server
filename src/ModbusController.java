@@ -9,6 +9,8 @@
 import com.ghgande.j2mod.modbus.msg.ReadInputRegistersResponse;
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /* 
@@ -29,7 +31,7 @@ public class ModbusController extends Observable{
     private ArrayList<ModbusRegisterObject>         fifoForRead;                              // the read list (stack)
     public static ModbusController                  mbController;                             // A global variable to find this class without explicit reference
     
-    private long atime;     // just for test 
+    private Timer t = new java.util.Timer();
     
     public ModbusController(){
         
@@ -41,13 +43,41 @@ public class ModbusController extends Observable{
         
         if (modbusReader.isConnected() ) {                                                // connect to modbus and we will keep it connected
             // modbus connected we can start reading data 
-            //atime = System.currentTimeMillis();                                      
-            setTimer();                                                                     // start sampling 
+            
+            System.out.println("Modbus connected"); 
+                                                                             // start sampling 
         }else {
             System.out.println("Modbus connection failure");                                // we had an error
         }
     }
+
+    public void startSampling() {
+        setTimer();        
+    }
     
+    public boolean isActive(String deviceType, int index) {
+        int regNum = fieldDefinitions.findPingRegister(deviceType, index);
+        if (regNum > -1) {
+            ModbusRegisterObject aRegisterObject = fieldDefinitions.findRegisterObject(regNum, index);
+            if (aRegisterObject != null) {
+                ReadInputRegistersResponse aResponse = modbusReader.readRegister(aRegisterObject.getUnitId(), regNum);
+                if (aResponse != null) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    public boolean ping(String deviceType, int index) {
+        boolean aFlag = isActive(deviceType, index);
+        if (!aFlag) {
+            System.out.println("ping retry");
+            aFlag = isActive(deviceType, index);
+            return aFlag;
+        }
+        return false;
+    }
     // find the corresponding registerObject for a field number and device index
     public ModbusRegisterObject findRegisterObject(int registerNumber, int index){
             return fieldDefinitions.findRegisterObject(registerNumber,index);
@@ -67,9 +97,10 @@ public class ModbusController extends Observable{
     
     // the sampling thread
     private void setTimer() {
-        new java.util.Timer().schedule(new java.util.TimerTask() {
+            
+            TimerTask tt = new java.util.TimerTask() {
             @Override
-            public void run() {
+            public void run() {            
                 notifyListeners();
                 if (fifoForRead.size() > 0) {
                     // work through the list of checked in objects and read the registers
@@ -79,16 +110,14 @@ public class ModbusController extends Observable{
                         ReadInputRegistersResponse aResponse = modbusReader.readRegister(registerObject.getUnitId(), registerObject.getRegisterNumber());
                         if (aResponse != null) {
                             registerObject.updateValue(aResponse);
-  // System.out.println("updateValue  " + registerObject.getRegisterName() + " = " + registerObject.getValue());  //test
+                        }else {
+                            registerObject.deleteObservers();       // make sure it does not bother us again
                         }
                     }
                     fifoForRead.remove(0);      // take the request off the stack, we are done with it 
                 }
-                //atime=System.currentTimeMillis();  
-                setTimer(); // reset the timer
             }
-        },
-           timeBase     // our time Base for the timer interrupt (min sampling rate) 
-        );
+        };
+        t.schedule(tt, timeBase ,timeBase);    // our time Base for the timer interrupt (min sampling rate)         
     }
 }

@@ -19,8 +19,8 @@ public class ModbusInterface {
     private static TCPMasterConnection connnection;
     private static ModbusTCPTransaction transaction;
 
-    private static ReadInputRegistersRequest readRequest;
-    private static ReadInputRegistersResponse readResult;
+    private static ReadInputRegistersRequest readRequest = null;
+    private static ReadInputRegistersResponse readResult = null;
 
     private static String ip = "192.168.0.8";                                        // the CCGX in my installation
     private static int port = 502;                                                   // default modbus port
@@ -40,10 +40,10 @@ public class ModbusInterface {
             transaction = null;                                             //the transaction
             connnection.setPort(port);                                      // specify the port for the connection
             connnection.connect();
-            connnection.setTimeout(1000);
+            connnection.setTimeout(3000);
             if (connnection.isConnected()) {
                 transaction = new ModbusTCPTransaction(connnection);       // define the transaction for an established connection
-                transaction.setRetries(2);//
+                transaction.setRetries(3);//
                 transaction.setReconnecting(true);
             }
         } catch (Exception ex) {
@@ -52,9 +52,11 @@ public class ModbusInterface {
     }
 
     public ReadInputRegistersResponse readRegister(int slaveId, int register) {
+        System.out.println("Read: " + register);
         try {
             if (transaction != null) {
-                readRequest = new ReadInputRegistersRequest(register, 1);
+        
+                readRequest = new ReadInputRegistersRequest(register, 1);        
                 readResult = new ReadInputRegistersResponse();
                 readRequest.setTransactionID(transaction.getTransactionID());
                 readRequest.setUnitID(slaveId);                                         // the device ID connected to the CCGX  
@@ -63,12 +65,14 @@ public class ModbusInterface {
                 transaction.execute();
                 readResult = (ReadInputRegistersResponse) transaction.getResponse();
                 return readResult;
+            }else{
+                System.out.println("No connection yet");
             }
 
         } catch (Exception ex) {
             System.out.println("Modbus TCP Read Error");
         }
-        System.out.println("No connection yet");
+        
         return null;
     }
    

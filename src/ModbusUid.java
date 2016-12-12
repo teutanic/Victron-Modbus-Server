@@ -10,13 +10,15 @@ public class ModbusUid {
     private String type;        // the device type - MPPT,BMC,Multi
     private int index;          // the index of the device if more than one
     private int uId;            // the modbus uinit id or slave id 
+    private int pingRegister;   // the register to read as a simple ping of the device
     
     
     // a helper class to hold the info about each modbus device connected
-    public ModbusUid (String aType,int anIndex, int aUid){
-        type = aType;
-        index=anIndex;
-        uId=aUid;
+    public ModbusUid (String aType,int anIndex, int aUid, int aPingRegister){
+        type            = aType;
+        index           = anIndex;
+        uId             = aUid;
+        pingRegister    = aPingRegister;
     }
 
     // we get asked if we are the right uId for the given device type and index
@@ -68,6 +70,20 @@ public class ModbusUid {
      */
     public void setuId(int uId) {
         this.uId = uId;
+    }
+
+    /**
+     * @return the pingRegister
+     */
+    public int getPingRegister() {
+        return pingRegister;
+    }
+
+    /**
+     * @param pingRegister the pingRegister to set
+     */
+    public void setPingRegister(int pingRegister) {
+        this.pingRegister = pingRegister;
     }
     
     

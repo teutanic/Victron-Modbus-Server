@@ -28,6 +28,7 @@ public class ModbusRegisterObject extends Observable implements Observer{
     private int unitId;
     private int sampleCount = 0;
     private long sampleNumber=0;
+    private boolean forceRead = false;
     
     public ModbusRegisterObject ( String aType,int anIndex, String aSampleType, String aName, int aRegisterNumber, 
                                   String aValueType, float aScaleFactor, boolean aFlag, float aSampleFactor ,int aUnitId) {
@@ -45,24 +46,30 @@ public class ModbusRegisterObject extends Observable implements Observer{
         samplingInterval    = 0;
         
         setLastUpdate(System.currentTimeMillis());
+        
     }
     
     @Override
     public void update(Observable observable, Object arg) {
-        if (sampleFactor!=0 && this.countObservers()>0){
+        if ((sampleFactor!=0 && this.countObservers()>0) || forceRead){
             // check if we need a new sample 
             // int currentCount =  ((ModbusController)observable).getSampleCount();
             // sample factor example:  5 means 5 samples pro second, each count represents 100ms
             sampleCount++;
-            if (sampleCount >= 10/sampleFactor ) {
+            if (sampleCount >= 10/sampleFactor || forceRead) {
                  sampleCount = 0; // reset the count
                  setSamplingInterval(System.currentTimeMillis()-getLastUpdate()); 
                  setLastUpdate(System.currentTimeMillis());
                  // it's our turn, get registered to read
                 sampleNumber+=1;
-                ((ModbusController)observable).addToFifo(this); 
+                ((ModbusController)observable).addToFifo(this);
+                forceRead = false;
             }           
         }
+    }
+    
+    public void forceRead(){
+        forceRead = true;
     }
     
     // We recived the response object. Get the first value and update

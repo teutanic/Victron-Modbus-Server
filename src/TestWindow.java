@@ -8,11 +8,13 @@
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -100,6 +102,32 @@ public class TestWindow extends JFrame implements Observer {
         });
         stpbtn.setBounds(20+0, 30+160, 100, 29);
         getContentPane().add(stpbtn);
+        
+        boolean aFlag ;
+        /*
+         aFlag = ModbusController.mbController.ping("MPPT", 0);
+        System.out.println("is Active - MPPT0 " +   " : " + aFlag );
+        
+        
+          aFlag = ModbusController.mbController.ping("BMV", 0);
+        System.out.println("is Active - BMV0 " +   " : " + aFlag );
+        
+         aFlag = ModbusController.mbController.ping("Multi", 0);
+        System.out.println("is Active - Multi " +   " : " + aFlag );
+        
+       
+        
+         aFlag = ModbusController.mbController.ping("BMV", 1);
+        System.out.println("is Active - BMV1 " +   " : " + aFlag );
+        
+        
+        
+         aFlag = ModbusController.mbController.ping("MPPT", 1);
+        System.out.println("is Active - MPPT1 " +   " : " + aFlag );
+        */
+        
+        ModbusController.mbController.startSampling();
+        
     }
 
     // with read field  we make this instance an observer of the given 
@@ -109,10 +137,12 @@ public class TestWindow extends JFrame implements Observer {
     // this test only allows for one active read due to the limitation 
     // of one display field. a previous observer will be removed 
     public void readField(int register,int index) {
+       
         ModbusRegisterObject anObject = ModbusController.mbController.findRegisterObject(register,index);
         stop();                         // stop any current observers
         if (anObject != null) {
             anObject.addObserver(this);
+            anObject.forceRead();
         }else {
             valueDisplayField.setText("unknown");
         }
