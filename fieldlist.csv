@@ -1,0 +1,141 @@
+Multi,0,c,Input voltage phase 1,3,uint16,10,0,1
+Multi,0,c,Input current phase 1,6,int16,10,0,5
+Multi,0,c,Input frequency 1,9,int16,100,0,0.01
+Multi,0,c,Input power 1,12,int16,0.1,0,5
+Multi,0,c,Output voltage phase 1,15,int16,10,0,0.2
+Multi,0,c,Output current phase 1,18,int16,10,0,5
+Multi,0,c,Output frequency,21,int16,100,0,0.01
+Multi,0,c,Active input current limit,22,int16,10,1,0.1
+Multi,0,c,Output power 1,23,int16,0.1,0,5
+Multi,0,c,Battery voltage,26,uint16,100,0,0.5
+Multi,0,c,Battery current,27,int16,10,0,5
+Multi,0,d,Active Flag AC input,29,uint16,1,0,0.2
+Multi,0,c,VE.Bus state of charge,30,uint16,10,1,0.1
+Multi,0,d,VE.Bus state,31,uint16,1,0,1
+Multi,0,d,VE.Bus Error,32,uint16,1,0,1
+Multi,0,d,Main Switch Position,33,uint16,1,1,1
+Multi,0,d,Temperature alarm,34,uint16,1,0,1
+Multi,0,d,Low battery alarm,35,uint16,1,0,1
+Multi,0,d,Overload alarm,36,uint16,1,0,1
+BMV,0,c,Battery voltage,259,uint16,100,0,0.2
+BMV,0,c,Current,261,int16,10,0,5
+BMV,0,c,Battery temperature,262,int16,10,0,0.1
+BMV,0,c,Mid-point voltage of the battery bank,263,uint16,100,0,0
+BMV,0,c,Mid-point deviation of the battery bank,264,uint16,100,0,0
+BMV,0,c,Consumed Amphours,265,uint16,-10,0,0.2
+BMV,0,c,State of charge,266,uint16,10,0,0.2
+BMV,0,d,Alarm,267,uint16,1,0,1
+BMV,0,d,Low voltage alarm,268,uint16,1,0,0
+BMV,0,d,High voltage alarm,269,uint16,1,0,0
+BMV,0,d,Low starter-voltage alarm,270,uint16,1,0,0
+BMV,0,d,High starter-voltage alarm,271,uint16,1,0,0
+BMV,0,d,Low State-of-charge alarm,272,uint16,1,0,0
+BMV,0,d,Low temperature alarm,273,uint16,1,0,0
+BMV,0,d,High temperature alarm,274,uint16,1,0,0
+BMV,0,d,Mid-voltage alarm,275,uint16,1,0,0
+BMV,0,d,Low fused-voltage alarm,276,uint16,1,0,0
+BMV,0,d,High fused-voltage alarm,277,uint16,1,0,0
+BMV,0,d,Fuse blown alarm,278,uint16,1,0,0
+BMV,0,d,High internal-temperature alarm,279,uint16,1,0,0
+BMV,0,d,Relay status,280,uint16,1,0,0
+BMV,0,d,Deepest discharge,281,uint16,-10,0,0
+BMV,0,d,Last discharge,282,uint16,-10,0,0
+BMV,0,d,Average discharge,283,uint16,-10,0,0
+BMV,0,d,Charge cycles,284,uint16,1,0,0
+BMV,0,d,Full discharges,285,uint16,1,0,0
+BMV,0,c,Total Ah drawn,286,uint16,-10,0,0
+BMV,0,d,Minimum voltage,287,uint16,100,0,0
+BMV,0,d,Maximum voltage,288,uint16,100,0,0
+BMV,0,d,Time since last full charge,289,uint16,0.01,0,0
+BMV,0,d,Automatic syncs,290,uint16,1,0,0
+BMV,0,d,Low voltage alarms,291,uint16,1,0,0
+BMV,0,d,High voltage alarms,292,uint16,1,0,0
+BMV,0,d,Low fused-voltage alarms,297,uint16,1,0,0
+BMV,0,d,High fused-voltage alarms,298,uint16,1,0,0
+BMV,0,d,Minimum fused voltage,299,uint16,100,0,0
+BMV,0,d,Maximum fused voltage,300,uint16,100,0,0
+BMV,0,c,Discharged Energy,301,uint16,10,0,0.2
+BMV,0,c,Charged Energy,302,uint16,10,0,0.2
+BMV,0,c,Time to go,303,uint16,0.01,0,0
+BMV,0,d,State of health,304,uint16,10,0,0
+MPPT,0,c,Battery voltage,771,uint16,100,0,0.2
+MPPT,0,c,Battery current,772,int16,10,0,5
+MPPT,0,c,Battery temperature,773,int16,10,0,0.2
+MPPT,0,d,Charger on/off,774,int16,1,1,5
+MPPT,0,c,Charge state,775,uint16,1,0,0.5
+MPPT,0,c,PV voltage,776,uint16,100,0,0.2
+MPPT,0,c,PV current,777,int16,10,0,5
+MPPT,0,d,Equalization pending,778,uint16,1,0,0
+MPPT,0,d,Equalization time remaining,779,uint16,10,0,0
+MPPT,0,d,Relay on the charger,780,uint16,1,0,0
+MPPT,0,d,Alarm Summary ,781,uint16,1,0,0.2
+MPPT,0,d,Low batt. voltage alarm,782,uint16,1,0,0
+MPPT,0,d,High batt. voltage alarm,783,uint16,1,0,0
+MPPT,0,c,Yield today,784,uint16,10,0,0.1
+MPPT,0,c,Maximum charge power today,785,uint16,1,0,0.1
+MPPT,0,d,Yield yesterday,786,uint16,10,0,0.1
+MPPT,0,d,Maximum charge power yesterday,787,uint16,1,0,0.1
+MPPT,0,d,Error code,788,uint16,1,0,0.1
+MPPT,0,c,Power Yield,789,uint16,10,0,0.1
+MPPT,0,c,User yield,790,uint16,10,0,0.1
+BMV,1,c,Battery voltage,259,uint16,100,0,0.2
+BMV,1,c,Current,261,int16,10,0,5
+BMV,1,c,Battery temperature,262,int16,10,0,0.1
+BMV,1,c,Mid-point voltage of the battery bank,263,uint16,100,0,0
+BMV,1,c,Mid-point deviation of the battery bank,264,uint16,100,0,0
+BMV,1,c,Consumed Amphours,265,uint16,-10,0,0.2
+BMV,1,c,State of charge,266,uint16,10,0,0.2
+BMV,1,d,Alarm,267,uint16,1,0,1
+BMV,1,d,Low voltage alarm,268,uint16,1,0,0
+BMV,1,d,High voltage alarm,269,uint16,1,0,0
+BMV,1,d,Low starter-voltage alarm,270,uint16,1,0,0
+BMV,1,d,High starter-voltage alarm,271,uint16,1,0,0
+BMV,1,d,Low State-of-charge alarm,272,uint16,1,0,0
+BMV,1,d,Low temperature alarm,273,uint16,1,0,0
+BMV,1,d,High temperature alarm,274,uint16,1,0,0
+BMV,1,d,Mid-voltage alarm,275,uint16,1,0,0
+BMV,1,d,Low fused-voltage alarm,276,uint16,1,0,0
+BMV,1,d,High fused-voltage alarm,277,uint16,1,0,0
+BMV,1,d,Fuse blown alarm,278,uint16,1,0,0
+BMV,1,d,High internal-temperature alarm,279,uint16,1,0,0
+BMV,1,d,Relay status,280,uint16,1,0,0
+BMV,1,d,Deepest discharge,281,uint16,-10,0,0
+BMV,1,d,Last discharge,282,uint16,-10,0,0
+BMV,1,d,Average discharge,283,uint16,-10,0,0
+BMV,1,d,Charge cycles,284,uint16,1,0,0
+BMV,1,d,Full discharges,285,uint16,1,0,0
+BMV,1,c,Total Ah drawn,286,uint16,-10,0,0
+BMV,1,d,Minimum voltage,287,uint16,100,0,0
+BMV,1,d,Maximum voltage,288,uint16,100,0,0
+BMV,1,d,Time since last full charge,289,uint16,0.01,0,0
+BMV,1,d,Automatic syncs,290,uint16,1,0,0
+BMV,1,d,Low voltage alarms,291,uint16,1,0,0
+BMV,1,d,High voltage alarms,292,uint16,1,0,0
+BMV,1,d,Low fused-voltage alarms,297,uint16,1,0,0
+BMV,1,d,High fused-voltage alarms,298,uint16,1,0,0
+BMV,1,d,Minimum fused voltage,299,uint16,100,0,0
+BMV,1,d,Maximum fused voltage,300,uint16,100,0,0
+BMV,1,c,Discharged Energy,301,uint16,10,0,0.2
+BMV,1,c,Charged Energy,302,uint16,10,0,0.2
+BMV,1,c,Time to go,303,uint16,0.01,0,0
+BMV,1,d,State of health,304,uint16,10,0,0
+MPPT,1,c,Battery voltage,771,uint16,100,0,0.2
+MPPT,1,c,Battery current,772,int16,10,0,5
+MPPT,1,c,Battery temperature,773,int16,10,0,0.2
+MPPT,1,d,Charger on/off,774,int16,1,1,5
+MPPT,1,c,Charge state,775,uint16,1,0,0.5
+MPPT,1,c,PV voltage,776,uint16,100,0,0.2
+MPPT,1,c,PV current,777,int16,10,0,5
+MPPT,1,d,Equalization pending,778,uint16,1,0,0
+MPPT,1,d,Equalization time remaining,779,uint16,10,0,0
+MPPT,1,d,Relay on the charger,780,uint16,1,0,0
+MPPT,1,d,Alarm Summary ,781,uint16,1,0,0.2
+MPPT,1,d,Low batt. voltage alarm,782,uint16,1,0,0
+MPPT,1,d,High batt. voltage alarm,783,uint16,1,0,0
+MPPT,1,c,Yield today,784,uint16,10,0,0.1
+MPPT,1,c,Maximum charge power today,785,uint16,1,0,0.1
+MPPT,1,d,Yield yesterday,786,uint16,10,0,0.1
+MPPT,1,d,Maximum charge power yesterday,787,uint16,1,0,0.1
+MPPT,1,d,Error code,788,uint16,1,0,0.1
+MPPT,1,c,Power Yield,789,uint16,10,0,0.1
+MPPT,1,c,User yield,790,uint16,10,0,0.1
