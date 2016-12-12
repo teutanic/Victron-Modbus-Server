@@ -104,27 +104,24 @@ public class TestWindow extends JFrame implements Observer {
         getContentPane().add(stpbtn);
         
         boolean aFlag ;
-        /*
+        
+        aFlag = ModbusController.mbController.ping("Multi", 0);
+        System.out.println("is Active - Multi " +   " : " + aFlag );
+        
          aFlag = ModbusController.mbController.ping("MPPT", 0);
         System.out.println("is Active - MPPT0 " +   " : " + aFlag );
-        
         
           aFlag = ModbusController.mbController.ping("BMV", 0);
         System.out.println("is Active - BMV0 " +   " : " + aFlag );
         
-         aFlag = ModbusController.mbController.ping("Multi", 0);
-        System.out.println("is Active - Multi " +   " : " + aFlag );
-        
-       
         
          aFlag = ModbusController.mbController.ping("BMV", 1);
         System.out.println("is Active - BMV1 " +   " : " + aFlag );
         
         
-        
          aFlag = ModbusController.mbController.ping("MPPT", 1);
         System.out.println("is Active - MPPT1 " +   " : " + aFlag );
-        */
+      
         
         ModbusController.mbController.startSampling();
         

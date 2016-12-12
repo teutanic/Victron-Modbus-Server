@@ -36,7 +36,7 @@ public class ModbusDefinitions {
         uidList.add( new ModbusUid("MPPT", 1, 1, 774));         // index 1 is the second MPPT controller at aId 1
         uidList.add( new ModbusUid("BMV",  0, 245, 259));       // the BMV on Ve-direct 1
         uidList.add( new ModbusUid("BMV",  1, 247, 259));       // the BMV on Ve-direct 2
-        uidList.add( new ModbusUid("Multi",0, 246, 33));        // the pair of multis appears as one 
+        uidList.add( new ModbusUid("Multi",0, 246, 23));        // the pair of multis appears as one 
 
         
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {

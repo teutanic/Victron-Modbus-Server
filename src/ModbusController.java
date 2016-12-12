@@ -72,11 +72,11 @@ public class ModbusController extends Observable{
     public boolean ping(String deviceType, int index) {
         boolean aFlag = isActive(deviceType, index);
         if (!aFlag) {
-            System.out.println("ping retry");
+            // System.out.println("ping retry");
             aFlag = isActive(deviceType, index);
             return aFlag;
         }
-        return false;
+        return aFlag;
     }
     // find the corresponding registerObject for a field number and device index
     public ModbusRegisterObject findRegisterObject(int registerNumber, int index){
